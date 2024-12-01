@@ -27,7 +27,9 @@ class OptionsManager {
     
     document.querySelector('h1').textContent = I18n.getMessage('settings');
     document.querySelector('label').textContent = I18n.getMessage('emailLabel');
-    document.querySelector('.hint').textContent = I18n.getMessage('emailHint');
+    document.querySelector('.hint').textContent = I18n.getMessage('emailHint'); 
+    document.querySelector('#donateTitle').textContent = I18n.getMessage('donateTitle'); 
+    document.querySelector('#donateText').textContent = I18n.getMessage('donate'); 
     this.saveButton.textContent = I18n.getMessage('save');
   }
 
@@ -82,6 +84,39 @@ class OptionsManager {
   }
 }
 
+// 获取模态框元素
+const modal = document.getElementById('donateModal');
+const donateButton = document.getElementById('donateButton');
+const closeBtn = document.querySelector('.close');
+
+// 添加多语言支持
+async function initializeDonateText() {
+  const donateText = document.getElementById('donateText');
+  const donateTitle = document.getElementById('donateTitle');
+  
+  donateText.textContent = await I18n.getMessage('donate');
+  donateTitle.textContent = await I18n.getMessage('donateTitle');
+}
+
+// 打开模态框
+donateButton.onclick = function() {
+  modal.style.display = "block";
+}
+
+// 关闭模态框
+closeBtn.onclick = function() {
+  modal.style.display = "none";
+}
+
+// 点击模态框外部关闭
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+// 初始化时调用
 document.addEventListener('DOMContentLoaded', () => {
+  initializeDonateText();
   new OptionsManager();
 }); 

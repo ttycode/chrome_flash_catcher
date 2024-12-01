@@ -17,7 +17,9 @@ const i18n = {
     invalidEmail: 'Please enter a valid email address',
     saveSuccess: 'Email saved successfully!',
     saveFailed: 'Save failed, please try again later',
-    dbError: 'Database connection failed'
+    dbError: 'Database connection failed',
+    donate: 'Support Author',
+    donateTitle: 'Thank you for your support!'
   },
   zh: {
     appName: '闪念笔记',
@@ -37,7 +39,9 @@ const i18n = {
     invalidEmail: '请输入有效的电子邮件地址',
     saveSuccess: '邮箱保存成功！',
     saveFailed: '保存失败，请稍后重试',
-    dbError: '数据库连接失败'
+    dbError: '数据库连接失败',
+    donate: '赞赏作者',
+    donateTitle: '感谢您的赞赏！'
   }
 };
 
