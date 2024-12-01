@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>闪念笔记</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>闪念笔记</h1>
+      <div class="header-buttons">
+        <button id="settingsBtn" class="icon-button" title="设置">⚙️</button>
+        <button id="closeBtn" class="icon-button" title="关闭">✕</button>
+      </div>
+    </div>
+    
+    <div class="input-area">
+      <textarea id="thoughtInput" placeholder="记录你的想法..." rows="3"></textarea>
+      <button id="saveThought">保存</button>
+    </div>
+
+    <div class="thoughts-list">
+      <!-- 想法列表将通过 JS 动态插入 -->
+    </div>
+
+    <div id="emailReminder" class="hidden">
+      <p>请先在设置页面配置邮箱</p>
+      <button id="goToSettings">去设置</button>
+    </div>
+  </div>
+  <script src="../js/storage.js"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html> 

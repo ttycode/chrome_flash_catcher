@@ -1,0 +1,20 @@
+quick-thoughts-extension/
+├── manifest.json
+├── icons/
+│   ├── icon16.png
+│   ├── icon32.png
+│   ├── icon48.png
+│   └── icon128.png
+├── popup/
+│   ├── popup.html
+│   ├── popup.css
+│   └── popup.js
+├── options/
+│   ├── options.html
+│   ├── options.css
+│   └── options.js
+├── js/
+│   ├── supabase.js
+│   └── storage.js
+└── lib/
+    └── supabase.js 

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>闪念笔记设置</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <h1>设置</h1>
+    <div class="form-group">
+      <label for="email">电子邮件</label>
+      <input type="email" id="email" required>
+      <p class="hint">邮箱将用于识别您的身份，无需密码</p>
+    </div>
+    <button id="save">保存</button>
+    <div id="status"></div>
+  </div>
+  <script src="../js/storage.js"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="options.js"></script>
+</body>
+</html> 
