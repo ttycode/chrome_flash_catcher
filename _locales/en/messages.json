@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "Flash Thoughts",
+    "description": "The name of the extension"
+  },
+  "appDescription": {
+    "message": "Record your instant thoughts and ideas",
+    "description": "The description of the extension"
+  }
+} 

@@ -1,5 +1,10 @@
 quick-thoughts-extension/
 ├── manifest.json
+├── _locales/
+│   ├── en/
+│   │   └── messages.json
+│   └── zh/
+│       └── messages.json
 ├── icons/
 │   ├── icon16.png
 │   ├── icon32.png
@@ -14,6 +19,7 @@ quick-thoughts-extension/
 │   ├── options.css
 │   └── options.js
 ├── js/
+│   ├── i18n.js
 │   ├── supabase.js
 │   └── storage.js
 └── lib/

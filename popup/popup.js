@@ -6,8 +6,10 @@ class PopupManager {
     this.emailReminder = document.getElementById('emailReminder');
     this.contextMenu = null;
     this.activeTooltip = null;
+    this.langSelect = document.getElementById('langSelect');
     
     this.init();
+    this.initLanguage();
   }
 
   async init() {
@@ -21,13 +23,60 @@ class PopupManager {
     await this.loadThoughts();
   }
 
+  async initLanguage() {
+    const currentLang = await I18n.init();
+    this.langSelect.value = currentLang;
+    this.updateTexts();
+    
+    this.langSelect.addEventListener('change', () => {
+      I18n.setLanguage(this.langSelect.value);
+      this.updateTexts();
+      
+      chrome.runtime.reload();
+    });
+  }
+
+  updateTexts() {
+    document.title = I18n.getMessage('appName');
+    
+    document.querySelector('h1').textContent = I18n.getMessage('appName');
+    this.thoughtInput.placeholder = I18n.getMessage('inputPlaceholder');
+    this.saveButton.textContent = I18n.getMessage('save');
+    document.getElementById('settingsBtn').title = I18n.getMessage('settings');
+    document.getElementById('closeBtn').title = I18n.getMessage('close');
+    
+    const reminder = document.querySelector('#emailReminder p');
+    if (reminder) {
+      reminder.textContent = I18n.getMessage('emailReminder');
+    }
+    const goToSettings = document.getElementById('goToSettings');
+    if (goToSettings) {
+      goToSettings.textContent = I18n.getMessage('goToSettings');
+    }
+    
+    chrome.action.setTitle({
+      title: I18n.getMessage('appName')
+    });
+  }
+
   setupEventListeners() {
     this.saveButton.addEventListener('click', () => this.saveThought());
-    document.getElementById('settingsBtn').addEventListener('click', () => {
-      chrome.runtime.openOptionsPage();
-    });
-    document.getElementById('closeBtn').addEventListener('click', () => {
+    
+    document.getElementById('settingsBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      chrome.runtime.sendMessage({ action: "openOptionsPage" });
       window.close();
+    });
+
+    document.getElementById('closeBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      window.close();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        window.close();
+      }
     });
   }
 
@@ -79,11 +128,11 @@ class PopupManager {
   createThoughtHTML(thought) {
     return `
       <div class="thought-item" data-id="${thought.id}">
-        <div class="thought-content" title="右键点击可复制内容">${thought.content}</div>
+        <div class="thought-content" title="${I18n.getMessage('copy')}">${thought.content}</div>
         <div class="thought-tooltip">${thought.content}</div>
         <div class="thought-actions">
-          <button class="edit-btn" title="编辑">✎</button>
-          <button class="delete-btn" title="删除">×</button>
+          <button class="edit-btn" title="${I18n.getMessage('edit')}">✎</button>
+          <button class="delete-btn" title="${I18n.getMessage('delete')}">×</button>
         </div>
       </div>
     `;
@@ -144,7 +193,8 @@ class PopupManager {
   showEmailReminder() {
     this.emailReminder.classList.remove('hidden');
     document.getElementById('goToSettings').addEventListener('click', () => {
-      chrome.runtime.openOptionsPage();
+      chrome.runtime.sendMessage({ action: "openOptionsPage" });
+      window.close();
     });
   }
 
@@ -185,7 +235,7 @@ class PopupManager {
     const contextMenu = document.createElement('div');
     contextMenu.className = 'context-menu';
     contextMenu.innerHTML = `
-      <div class="context-menu-item">复制内容</div>
+      <div class="context-menu-item">${I18n.getMessage('copy')}</div>
     `;
 
     contextMenu.style.left = `${e.pageX}px`;

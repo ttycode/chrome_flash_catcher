@@ -10,8 +10,12 @@
     <div class="header">
       <h1>闪念笔记</h1>
       <div class="header-buttons">
-        <button id="settingsBtn" class="icon-button" title="设置">⚙️</button>
-        <button id="closeBtn" class="icon-button" title="关闭">✕</button>
+        <select id="langSelect" class="lang-select">
+          <option value="en">EN</option>
+          <option value="zh">中文</option>
+        </select>
+        <button id="settingsBtn" class="icon-button" title="Settings">⚙️</button>
+        <button id="closeBtn" class="icon-button" title="Close">✕</button>
       </div>
     </div>
     
@@ -29,6 +33,7 @@
       <button id="goToSettings">去设置</button>
     </div>
   </div>
+  <script src="../js/i18n.js"></script>
   <script src="../js/storage.js"></script>
   <script src="../js/supabase.js"></script>
   <script src="popup.js"></script>

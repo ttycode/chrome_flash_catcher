@@ -5,6 +5,7 @@ class OptionsManager {
     this.statusDiv = document.getElementById('status');
     
     this.init();
+    this.initLanguage();
   }
 
   async init() {
@@ -14,6 +15,20 @@ class OptionsManager {
     }
 
     this.setupEventListeners();
+  }
+
+  async initLanguage() {
+    const currentLang = await I18n.init();
+    this.updateTexts();
+  }
+
+  updateTexts() {
+    document.title = I18n.getMessage('appName');
+    
+    document.querySelector('h1').textContent = I18n.getMessage('settings');
+    document.querySelector('label').textContent = I18n.getMessage('emailLabel');
+    document.querySelector('.hint').textContent = I18n.getMessage('emailHint');
+    this.saveButton.textContent = I18n.getMessage('save');
   }
 
   setupEventListeners() {
@@ -27,7 +42,7 @@ class OptionsManager {
     const email = this.emailInput.value.trim();
     
     if (!this.validateEmail(email)) {
-      this.showStatus('请输入有效的电子邮件地址', 'error');
+      this.showStatus(I18n.getMessage('invalidEmail'), 'error');
       return;
     }
 
@@ -37,13 +52,13 @@ class OptionsManager {
       
       if (error) {
         console.error('Supabase error:', error);
-        throw new Error('数据库连接失败');
+        throw new Error(I18n.getMessage('dbError'));
       }
 
-      this.showStatus('邮箱保存成功！', 'success');
+      this.showStatus(I18n.getMessage('saveSuccess'), 'success');
     } catch (error) {
-      console.error('保存失败:', error);
-      this.showStatus('保存失败，请稍后重试', 'error');
+      console.error('Save failed:', error);
+      this.showStatus(I18n.getMessage('saveFailed'), 'error');
     }
   }
 
