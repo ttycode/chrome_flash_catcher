@@ -31,6 +31,10 @@ class OptionsManager {
     document.querySelector('#donateTitle').textContent = I18n.getMessage('donateTitle'); 
     document.querySelector('#donateText').textContent = I18n.getMessage('donate'); 
     this.saveButton.textContent = I18n.getMessage('save');
+
+    chrome.action.setTitle({
+      title: I18n.getMessage('appName')
+    });
   }
 
   setupEventListeners() {
